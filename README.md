@@ -11,4 +11,15 @@ Código de cada una de las prácticas del ***Bootcamp JavaScript + TypeScript***
 * Módulo 00 - [GIT](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2000%20-%20GIT)
 * Módulo 01 - [HTML](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2001%20-%20HTML)
 * Módulo 02 - [Tipos de datos y Operadores](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2002%20-%20Tipos%20de%20datos%20y%20Operadores)
-
+* Módulo 03 - Variables
+* Módulo 04 - Funciones
+* Módulo 05 - Condicionales
+* Módulo 06 - Imports
+* Módulo 07 - Testing
+* Módulo 08 - Arrays y Bucles
+* Módulo 09 - Algoritmos
+* Módulo 10 - Asincronía
+* Módulo 11 - Expresiones regulares
+* Módulo 12 - Clases
+* Módulo 13 - React
+* Módulo 14 - Trabajo final
