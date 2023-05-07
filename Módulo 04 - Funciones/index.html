@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Display de turno</title>
+  </head>
+  <body>
+    <div class="main">
+
+      <div class="display-turn">
+        <h1 class="turn-number" id="turn-number">01</h1>
+        <p class="turn-text">Por favor, acérquese al mostrador</p>
+      </div>
+
+      <div class="buttons">
+        <div class="turn-buttons">
+          <input type="button" class="button" id="previous-button" value="Anterior">
+          <input type="button" class="button" id="follow-button" value="Siguiente">
+        </div>
+        
+        <div class="reset-button">
+          <input type="button" class="button" id="reset" value="Reset">
+        </div>
+      </div>
+
+      <div class="personal-turn">
+        <label for="personal-turn-number">Introduce un número de turno: </label>
+        <input type="number" class="personal-turn-number" id="personal-turn-number" value=0>
+        <input type="button" class="button" id="insert-number" value="Introducir">
+      </div>
+
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
