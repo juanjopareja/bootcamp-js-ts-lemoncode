@@ -7,8 +7,8 @@ function resetTurnNumber() {
     setNumber(0);
 }
 
-function setNumber(number : number) {
-    if (turnNumber !== null && turnNumber !== undefined) {
+function setNumber(number : number) {    
+    if (turnNumber) {
         turnNumber.innerHTML = `${number}`.padStart(2,'0');
     }
 }
@@ -16,11 +16,8 @@ function setNumber(number : number) {
 function followNumber() {
     if (turnNumber) {
         let newNumber = Number(turnNumber.innerHTML);
-
-        if (newNumber !== null && newNumber !== undefined && newNumber < 9999) {
-            newNumber++;
-            setNumber(newNumber);
-        }
+        newNumber++;
+        setNumber(newNumber);
     }
 }
 
@@ -28,7 +25,7 @@ function previousNumber() {
     if (turnNumber) {
         let newNumber = Number(turnNumber.innerHTML);
 
-        if (newNumber !== null && newNumber !== undefined && newNumber > 0) {
+        if (newNumber > 0) {
             newNumber--;
             setNumber(newNumber);
         }
