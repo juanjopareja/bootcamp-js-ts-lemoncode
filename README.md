@@ -12,7 +12,7 @@ Código de cada una de las prácticas del ***Bootcamp JavaScript + TypeScript***
 * Módulo 01 - [HTML](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2001%20-%20HTML)
 * Módulo 02 - [Tipos de datos y Operadores](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2002%20-%20Tipos%20de%20datos%20y%20Operadores)
 * Módulo 03 - [Variables](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2003%20-%20Variables)
-* Módulo 04 - Funciones
+* Módulo 04 - [Funciones](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2004%20-%20Funciones)
 * Módulo 05 - Condicionales
 * Módulo 06 - Imports
 * Módulo 07 - Testing
