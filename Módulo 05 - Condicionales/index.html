@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Las siete y media</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <h1 class="title">Las siete y media</h1>
+      </div>
+
+      <div class="game-board">
+        <div class="card-board">
+          <div class="right-card">
+            <img class="card" src="src/img/back.jpg" id="card" alt="imagen carta">
+          </div>
+
+          <div class="left-card">
+            <img class="card" id="what-if-card">
+          </div>
+        </div>
+        
+        <div class="options-board">
+          <div class="text">
+            <div class="score">
+              <h1 class="score-text" id="score"></h1>
+            </div>
+            
+            <div class="messages">
+              <h1 class="message" id="game-message"></h1>
+              <h1 class="message" id="resume-message"></h1>
+            </div>
+          </div>
+          
+          <div class="buttons">
+            <div class="default-buttons">
+              <div class="top-buttons">
+                <div class="take-card-button">
+                  <input class="button take-card" type="button" id="take-card" value="Dame Carta">
+                </div>
+                
+                <div class="stop-game-button">
+                  <input class="button stop-game" type="button" id="stop-game" value="Me Planto">
+                </div>
+              </div>
+
+              <div class="end-buttons">
+                <div class="new-game-button">
+                  <input class="button new-game" type="button" id="new-game" value="Nueva Partida">
+                </div>
+                
+                <div class="what-if-button">
+                  <input class="button what-if" type="button" id="what-if" value="What if...?">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

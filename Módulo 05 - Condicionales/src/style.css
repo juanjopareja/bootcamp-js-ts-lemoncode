@@ -1,0 +1,184 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(19, 19, 19, 0.87);
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.title {
+  color: #5082de;
+  -webkit-text-stroke: #3558b3 2px;
+  font-size: 64px;
+  margin-top: 20px;
+  margin-bottom: 70px;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 1000px;
+
+}
+
+.card-board {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: right;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.options-board {
+  display: grid;
+  grid-template-rows: 3fr 2fr;
+  justify-content: space-between;
+}
+
+.score-text {
+  font-size: 64px;
+  margin: 0 0 10px 0;
+}
+
+.messages {
+  margin-top: 10px;
+}
+
+.message {
+  font-size: 16px;
+  font-weight: 400;
+  width: 300px;
+}
+
+.card-board,
+.options-board {
+  margin: 10px;
+}
+
+.card {
+  padding: 0 10px;
+}
+
+.default-buttons {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.top-buttons,
+.end-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.buttons {
+  display: grid;
+  align-items: end;
+  max-width: 300px;
+}
+
+.button {
+  margin: 10px 10px;
+  padding: 7px 14px;
+  border-radius: 5px;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition-property: background-color;
+  transition-duration: .3s;
+}
+
+.take-card-button,
+.new-game-button {
+  text-align: right;
+  margin-right: 10px;
+}
+
+.stop-game-button,
+.what-if-button {
+  margin-left: 10px;
+  text-align: left;
+}
+
+.take-card {
+  background-color: #aad400;
+}
+
+.take-card:hover {
+  background-color: #7b9900;
+}
+
+.stop-game {
+  background-color: #ff2a2a;
+}
+
+.stop-game:hover {
+  background-color: #9e1a1a;
+}
+
+.new-game {
+  background-color: #5599ff;
+}
+
+.new-game:hover {
+  background-color: #3558b3;
+}
+
+.what-if {
+  background-color: #ffd42b;
+}
+
+.what-if:hover {
+  background-color: #b59620;
+}
+
+input[type="button"]:disabled {
+  background-color: #d9e0bd;
+  cursor: default;
+}
+
