@@ -272,10 +272,7 @@ const newGame = () => {
     activateButton("take-card");
     activateButton("stop-game");
 
-    const whatIfCard = document.getElementById("what-if-card");
-    if (whatIfCard !== null && whatIfCard !== undefined && whatIfCard instanceof HTMLImageElement) {
-        whatIfCard.setAttribute("src", "");
-    }
+    disableWhatIfCard();
 }
 
 // Función para botón de What If...?
@@ -320,6 +317,14 @@ const getWhatIfMessage = (newCardPoint: number, newScore: number, resumeMessage:
 
     if (resumeMessageRoute !== null && resumeMessageRoute !== undefined && resumeMessageRoute instanceof HTMLHeadingElement) {
         resumeMessageRoute.textContent = resumeMessage;
+    }
+}
+
+// Función para quitar carta de What If en nueva partida
+const disableWhatIfCard = () => {
+    const whatIfCard = document.getElementById("what-if-card");
+    if (whatIfCard !== null && whatIfCard !== undefined && whatIfCard instanceof HTMLImageElement) {
+        whatIfCard.setAttribute("src", "");
     }
 }
 
