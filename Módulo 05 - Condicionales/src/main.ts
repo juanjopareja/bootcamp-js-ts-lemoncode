@@ -1,56 +1,91 @@
 import "./style.css";
 
-// Variable de marcador actual
+//VARIABLES
+// Variables de marcador actual y marcador límite
 let currentScore: number = 0;
-
-// Rutas de Id's
-const newScore = document.getElementById("score");
-const messageRoute = document.getElementById("game-message");
-const resumeMessageRoute = document.getElementById("resume-message");
-const newGameBtn = document.getElementById("new-game");
-const whatIfBtn = document.getElementById("what-if");
-const takeCardBtn = document.getElementById("take-card");
-const stopGameBtn = document.getElementById("stop-game");
-const whatIfCard = document.getElementById("what-if-card");
-
-// Mostrar puntuación inicial en el DOM
-showScore(currentScore);
-
-// Desactivar los botones de Nueva Partida y What if...? al inicio del juego
-if (newGameBtn !== null) {
-    newGameBtn.style.display = "none";
-}
-
-if (whatIfBtn !== null) {
-    whatIfBtn.style.display = "none";
-}
-
+const limitScore: number = 7.5;
 
 // FUNCIONES
+// Función para iniciar partida
+const startGame = () => {
+    showScore(currentScore);
+    hideButton("new-game");
+    hideButton("what-if");
+}
+
 // Función para mostrar el marcador
-function showScore(score: number) {
-    if (newScore !== null) {
-        newScore.innerHTML = String(score);
+const showScore = (score: number) => {
+    const scoreRoute = document.getElementById("score");
+
+    if (scoreRoute !== null && scoreRoute !== undefined && scoreRoute instanceof HTMLHeadingElement) {
+        scoreRoute.textContent = String(score);
     }
+}
+
+// Función para esconder botones
+const hideButton = (id: string) => {
+    const buttonRoute = document.getElementById(id);
+
+    if (buttonRoute !== null && buttonRoute !== undefined && buttonRoute instanceof HTMLInputElement) {
+        buttonRoute.style.display = "none";
+    }
+}
+
+// Función para mostrar botones
+const showButton = (id: string) => {
+    const buttonRoute = document.getElementById(id);
+
+    if (buttonRoute !== null && buttonRoute !== undefined && buttonRoute instanceof HTMLInputElement) {
+        buttonRoute.style.display = "inline";
+    }
+}
+
+// Función para activar botones
+const activateButton = (id: string) => {
+    const buttonRoute = document.getElementById(id);
+
+    if (buttonRoute !== null && buttonRoute !== undefined && buttonRoute instanceof HTMLInputElement) {
+        buttonRoute.removeAttribute("disabled");
+    }
+}
+
+// Función para desactivar botones
+const disableButton = (id: string) => {
+    const buttonRoute = document.getElementById(id);
+
+    if (buttonRoute !== null && buttonRoute !== undefined && buttonRoute instanceof HTMLInputElement) {
+        buttonRoute.setAttribute("disabled", "");
+    }
+}
+
+// Función para reiniciar mensajes del juego
+const resetMessages = (id: string) => {
+    const messageRoute = document.getElementById(id);
+
+    if (messageRoute !== null && messageRoute !== undefined && messageRoute instanceof HTMLHeadingElement) {
+        messageRoute.textContent = "";
+    }
+}
+
+// Función para generar un número aleatorio
+const getRandomNumber = () => {
+    return Math.ceil(Math.random() * 10);
 }
 
 // Función para seleccionar una carta al azar
-function randomCard() {
-    let valueCard = Math.ceil(Math.random() * 12);
-
-    if (valueCard > 7 && valueCard < 10) {
-        valueCard = valueCard + 2;
+const getRandomCard = (randomNumber: number) => {
+    if (randomNumber > 7) {
+        return randomNumber + 2;
+    } else {
+        return randomNumber;
     }
-
-    return valueCard;
 }
 
-// Función para mostrar la carta elegida al azar en el DOM
-function showCard(numCard: number, id: string) {
-    let cardType = "";
-    let newCardRoute = "";
-    
-    switch (numCard) {
+// Función para seleccionar ruta de carta
+const getUrlCard = (randomNumber: number) => {
+    let cardType= "";
+
+    switch (randomNumber) {
         case 1:
             cardType = "_as";
             break;
@@ -96,144 +131,232 @@ function showCard(numCard: number, id: string) {
             break;
     }
 
-    if (numCard >= 1) {
-        newCardRoute = `src/img/${numCard}${cardType}-copas.jpg`;
-        document.getElementById(id)?.setAttribute("src" , newCardRoute); 
-
-    } else {
-        newCardRoute = `src/img/${cardType}.jpg`;
-        document.getElementById(id)?.setAttribute("src" , newCardRoute);
-    }
+    return cardType;
 }
 
-// Función para sumar puntuación al marcador según valor de carta
-function addScore(valueCard: number): number {
-    if (valueCard < 8) {
-        currentScore += valueCard;
-
-    } else {
-        currentScore += 0.5;
-    }
+// Función para asignar ruta a las cartas
+const asignRoute = (randomNumber: number) => {
+    let cardTypeRoute = "";
+    const cardType = getUrlCard(randomNumber);
     
-    return currentScore;
+    cardTypeRoute = `src/img/${randomNumber}${cardType}-copas.jpg`;
+
+    return cardTypeRoute;
 }
 
-// Función para fin de juego por pasarnos de puntuación
-function gameOver(score: number) {
-    if (score > 7.5 && messageRoute !== null && newGameBtn !== null && whatIfBtn !== null) {
-        messageRoute.innerHTML = "Has perdido";
-        takeCardBtn?.setAttribute("disabled", "");
-        stopGameBtn?.setAttribute("disabled", "");
-        newGameBtn.style.display = "inline";
+// Función para mostrar la carta elegida al azar en el DOM
+const printCard = (cardRoute: string) => {
+    const finalCardRoute = document.getElementById("card");
+
+    if(finalCardRoute !== null && finalCardRoute !== undefined && finalCardRoute instanceof HTMLImageElement) {
+        finalCardRoute.src = cardRoute;
     }
+}
+
+// Función para mostrar la carta de What if...
+const printWhatIfCard = (cardRoute: string) => {
+    const whatIfCardRoute = document.getElementById("what-if-card");
+
+    if(whatIfCardRoute !== null && whatIfCardRoute !== undefined && whatIfCardRoute instanceof HTMLImageElement) {
+        whatIfCardRoute.src = cardRoute;
+    }
+}
+
+// Función para tomar el valor de carta
+const getCardPoint = (card: number) => {
+    if (card > 7) {
+        return 0.5;
+    } else {
+        return card;
+    }
+}
+
+// Función para sumar puntos
+const addPoints = (points: number) => {
+    return currentScore + points;
+}
+
+// Función para establecer nuevo marcador
+const setCurrentScore = (newPoints: number) => {
+    currentScore = newPoints;
+}
+
+// Función para establecer el marcador a 0
+const resetScore = () => {
+    currentScore = 0;
+}
+
+// Función para chequear la puntuación y poner fin de juego por pasarnos de puntuación
+const checkGame = (score: number) => {
+    if (score > limitScore) {
+        lostGame();
+    } else if (score === limitScore) {
+        winGame();
+    }
+}
+
+// Función para juego ganado
+const winGame = () => {
+    const winScore = currentScore;
+    getMessage(winScore);    
+
+    disableButton("take-card");
+    disableButton("stop-game");
+
+    showButton("new-game");
+}
+
+// Función para juego perdido
+const lostGame = () => {
+    const lostScore = currentScore;
+    getMessage(lostScore);
+
+    disableButton("take-card");
+    disableButton("stop-game");
+
+    showButton("new-game");
 }
 
 // Función para detener el juego en una mano cualquiera
-function stopGame() {
-    let stopMessage = gameMessage(currentScore);
-    takeCardBtn?.setAttribute("disabled", "");
-    stopGameBtn?.setAttribute("disabled", "");
+const stopGame = () => {
+    const totalScore = currentScore;
+    getMessage(totalScore);
 
-    if (messageRoute !== null && newGameBtn!== null) {
-        messageRoute.innerHTML = stopMessage;
-        newGameBtn.style.display = "inline";
-    }
+    disableButton("take-card");
+    disableButton("stop-game");
 
-    if (currentScore < 7.5 && whatIfBtn !== null) {
-        whatIfBtn.style.display = "inline";
+    showButton("new-game");
+    showButton("what-if");
+}
+
+// Función para mostrar mensaje de puntuación
+const getMessage = (scoreValue: number) => {
+    let stopMessage = gameMessage(scoreValue);
+    const messageRoute = document.getElementById("game-message");
+
+    if (messageRoute !== null && messageRoute !== undefined && messageRoute instanceof HTMLHeadingElement) {
+        messageRoute.textContent = stopMessage;
     }
 }
 
 // Función para seleccionar mensaje según puntuación
-function gameMessage(scoreValue:  number) {
+const gameMessage = (scoreValue:  number) => {
     let message = "";
 
     if (scoreValue <= 4) {
         message = "Has sido muy conservador";
     } else if (scoreValue > 4 && scoreValue < 6) {
         message = "Te ha entrado el canguelo, eh?";
-    } else if (scoreValue >= 6 && scoreValue < 7.5) {
+    } else if (scoreValue >= 6 && scoreValue < limitScore) {
         message = "Casi, casi...";
-    } else if (scoreValue === 7.5) {
+    } else if (scoreValue === limitScore) {
         message = "¡Lo has clavado!¡Enhorabuena!";
+    } else if (scoreValue > limitScore) {
+        message = "Has perdido";
     }
 
     return message;
 }
 
 // Función para botón de Nueva Partida
-function newGame() {
-    currentScore = 0;
+const newGame = () => {
+    resetScore();
     showScore(0);
-    showCard(0, "card");
-    takeCardBtn?.removeAttribute("disabled");
-    stopGameBtn?.removeAttribute("disabled");
-    whatIfCard?.setAttribute("src", "");
+    printCard("src/img/back.jpg");
+    
+    hideButton("new-game");
+    hideButton("what-if");
+    resetMessages("game-message");
+    resetMessages("resume-message");
 
-    if (newGameBtn !== null) {
-        newGameBtn.style.display = "none";
-    }
+    activateButton("take-card");
+    activateButton("stop-game");
 
-    if (whatIfBtn !== null) {
-        whatIfBtn.style.display = "none";
-    }
-
-    if (messageRoute !== null && resumeMessageRoute !== null) {
-        messageRoute.innerHTML = "";
-        resumeMessageRoute.innerHTML = "";
+    const whatIfCard = document.getElementById("what-if-card");
+    if (whatIfCard !== null && whatIfCard !== undefined && whatIfCard instanceof HTMLImageElement) {
+        whatIfCard.setAttribute("src", "");
     }
 }
 
 // Función para botón de What If...?
-function whatIf() {
-    let newCard = randomCard();
+const whatIf = () => {
+    const randomNumber = getRandomNumber();
+    const numCard = getRandomCard(randomNumber);
+    const urlCard = asignRoute(numCard);
+    printWhatIfCard(urlCard);
 
-    showCard(newCard, "what-if-card");
-    addScore(newCard);
+    const cardPoint = getCardPoint(numCard);
+    const newPoints = addPoints(cardPoint);
+    setCurrentScore(newPoints);
     showScore(currentScore);
-    whatIfMessage(newCard, currentScore);
+
+    const newMessage = whatIfMessage(currentScore);
+    getWhatIfMessage(cardPoint, currentScore, newMessage);
 }
 
 // Función para seleccionar mensajes de What if...?
-function whatIfMessage(newCardValue: number, newScore: number) {
+const whatIfMessage = (newScore: number) => {
     let resumeMessage = "";
 
-    if (newCardValue <= 7) {
-        newCardValue = newCardValue;
-    } else {
-        newCardValue = 0.5;
-    }
-
-    if (messageRoute !== null) {
-        messageRoute.innerHTML = `En la siguiente mano hubieras sacado una carta con valor de ${newCardValue} puntos y tu puntuación sería de ${newScore} puntos.`;
-    }
-
-    if (newScore < 7.5) {
+    if (newScore < limitScore) {
         resumeMessage = "Seguirias sin llegar a 7 y medio...";
-    } else if (newScore > 7.5) {
+    } else if (newScore > limitScore) {
         resumeMessage = "Te habrías pasado de puntuación...";
-    } else if (newScore === 7.5) {
+    } else if (newScore === limitScore) {
         resumeMessage = "¡Hubieras ganado la partida, melón!"
     }
 
-    if (resumeMessageRoute !== null) {
-        resumeMessageRoute.innerHTML = resumeMessage;
+    return resumeMessage;
+}
+
+// Función para imprimir mensaje de What If...
+const getWhatIfMessage = (newCardPoint: number, newScore: number, resumeMessage: string) => {
+    const messageRoute = document.getElementById("game-message");
+    const resumeMessageRoute = document.getElementById("resume-message")
+
+    if (messageRoute !== null && messageRoute !== undefined && messageRoute instanceof HTMLHeadingElement) {
+        messageRoute.textContent = `En la siguiente mano hubieras sacado una carta con valor de ${newCardPoint} puntos y tu puntuación sería de ${newScore} puntos.`;
+    }
+
+    if (resumeMessageRoute !== null && resumeMessageRoute !== undefined && resumeMessageRoute instanceof HTMLHeadingElement) {
+        resumeMessageRoute.textContent = resumeMessage;
     }
 }
 
 // Función del botón Dame Carta
-function takeCard() {
-    let numCard = randomCard();
+const takeCard = () => {
+    const randomNumber = getRandomNumber();
+    const numCard = getRandomCard(randomNumber);
+    const urlCard = asignRoute(numCard);
+    printCard(urlCard);
 
-    showCard(numCard, "card");
-    addScore(numCard);
+    const cardPoint = getCardPoint(numCard);
+    const newPoints = addPoints(cardPoint);
+    setCurrentScore(newPoints);
     showScore(currentScore);
-    gameOver(currentScore);
+    checkGame(currentScore);
 }
-                
+
+// Iniciar partida
+startGame();
 
 // EVENTS
-takeCardBtn?.addEventListener("click", takeCard);
-stopGameBtn?.addEventListener("click", stopGame);
-newGameBtn?.addEventListener("click", newGame);
-whatIfBtn?.addEventListener("click", whatIf);
+const takeCardBtn = document.getElementById("take-card");
+if (takeCardBtn !== null && takeCardBtn !== undefined && takeCardBtn instanceof HTMLInputElement) {
+    takeCardBtn.addEventListener("click", takeCard);
+}
+
+const stopGameBtn = document.getElementById("stop-game");
+if (stopGameBtn !== null && stopGameBtn !== undefined && stopGameBtn instanceof HTMLInputElement) {
+    stopGameBtn.addEventListener("click", stopGame);
+}
+
+const newGameBtn = document.getElementById("new-game");
+if (newGameBtn !== null && newGameBtn !== undefined && newGameBtn instanceof HTMLInputElement) {
+    newGameBtn.addEventListener("click", newGame);
+}
+
+const whatIfBtn = document.getElementById("what-if");
+if (whatIfBtn !== null && whatIfBtn !== undefined && whatIfBtn instanceof HTMLInputElement) {
+    whatIfBtn.addEventListener("click", whatIf);
+}
