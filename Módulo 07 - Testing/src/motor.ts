@@ -1,6 +1,7 @@
 // Importar partida con variables de modelo
 import {
-    game
+    game,
+    State
 } from './model';
 
 // Importar funciones de ui
@@ -135,8 +136,17 @@ export const checkGame = (score: number) => {
     }
 }
 
+// Función para devolver estado de partida
+export const stateGame = (score: number) => {
+    if (score === game.limitScore) {
+        return "WIN";
+    }
+
+    return "LOSE";
+}
+
 // Función para juego ganado
-const winGame = () => {
+export const winGame = () => {
     const winScore = game.currentScore;
     getMessage(winScore);
 
@@ -147,7 +157,7 @@ const winGame = () => {
 }
 
 // Función para juego perdido
-const lostGame = () => {
+export const lostGame = () => {
     const lostScore = game.currentScore;
     getMessage(lostScore);
 

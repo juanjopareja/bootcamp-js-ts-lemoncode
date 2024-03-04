@@ -10,3 +10,6 @@ export const game: Game = {
     limitScore: 7.5
 }
 
+// Estado
+export type State = | "WIN" | "LOSE";
+
