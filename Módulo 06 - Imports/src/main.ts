@@ -7,7 +7,7 @@ import {
     stopGame,
     newGame,
     whatIf
-} from './motor';
+} from './ui';
 
 // Iniciar partida
 startGame();
