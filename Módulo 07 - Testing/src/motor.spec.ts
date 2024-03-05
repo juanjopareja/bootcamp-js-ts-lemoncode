@@ -1,5 +1,6 @@
 import { vi } from "vitest";
-import { addPoints, gameMessage, getCardPoint, getRandomCard, stateGame } from "./motor";
+import { addPoints, getCardPoint, getRandomCard, stateGame } from "./motor";
+import { gameMessage } from "./ui";
 import { game } from "./model";
 
 // Pruebas unitarias función sumar puntos
