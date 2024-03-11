@@ -74,4 +74,45 @@ const pacientes: Pacientes[] = [
         especialidad: "Pediatra",
         edad: 11,
     },
-];
+]
+
+
+// Apartado 1. Extraer los pacientes asignados a la especialidad de "Pediatría".
+const obtenPacientesAsignadosAPediatria = (pacientes: Pacientes[]): Pacientes => {
+
+}
+
+
+// Apartado 2. Averiguar si hay pacientes con un ritmo cardiaco superior a 100
+// pulsaciones por minuto y temperatura corporal superior a 39 grados.
+const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
+    let activarProtocolo = false;
+
+    return activarProtocolo;
+}
+
+
+// Apartado 3. Reasignar los pacientes asignados a "Pediatría"
+// a la especialidad de "Médico de familia".
+const reasignarPacientesAMedicoFamilia = (pacientes: Pacientes[]): Pacientes => {
+
+}
+
+
+// Apartado 4. Saber si hay pacientes asignados a "Pediatría".
+const hayPacientesDePediatria = (pacientes: Pacientes[]): boolean => {
+
+}
+
+
+// Apartado 5. Calcular el número total de pacientes asignados a las
+// especialidades de "Médico de familia", "Pediatría" y "Cardiología".
+interface NumeroPacientesPorEspecialidad {
+    medicoFamilia: number;
+    padiatria: number;
+    cardiologia: number;
+}
+
+const cuentaPacientesPorEspecialidad = (pacientes: Pacientes[]): NumeroPacientesPorEspecialidad => {
+
+}
