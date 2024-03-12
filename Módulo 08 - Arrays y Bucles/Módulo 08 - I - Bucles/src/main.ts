@@ -77,7 +77,7 @@ const pacientes: Pacientes[] = [
 ]
 
 
-// Apartado 1. Extraer los pacientes asignados a la especialidad de "Pediatría".
+// Apartado 1a. Extraer los pacientes asignados a la especialidad de "Pediatría".
 const obtenPacientesAsignadosAPediatria = (pacientes: Pacientes[]): Pacientes[] => { 
     const pacientesPediatria: Pacientes[] = [];
 
@@ -86,12 +86,30 @@ const obtenPacientesAsignadosAPediatria = (pacientes: Pacientes[]): Pacientes[] 
             pacientesPediatria.push(pacientes[i]);
         }
     }
-
+    
     return pacientesPediatria;
 }
 
-console.log("Apartado 1. Pacientes con pediatría:");
+console.log("Apartado 1a. Pacientes en Pediatría:");
 console.log(obtenPacientesAsignadosAPediatria(pacientes));
+
+
+// Apartado 1b. Extraer los pacientes asignados a la especialidad de "Pediatría"
+// con una edad menor a 10 años.
+const obtenPacientesAsignadosAPediatriaMenorDeDiezAnios = (pacientes: Pacientes[]): Pacientes[] => {
+    const pacientesPediatriaDiezAnios: Pacientes[] = [];
+    
+    for (let i = 0; i < pacientes.length; i++) {
+        if (pacientes[i].especialidad === "Pediatra" && pacientes[i].edad < 10) {
+            pacientesPediatriaDiezAnios.push(pacientes[i]);
+        }
+    }
+
+    return pacientesPediatriaDiezAnios;
+}
+
+console.log("Apartado 1b. Pacientes en Pediatría menores de 10 años:");
+console.log(obtenPacientesAsignadosAPediatriaMenorDeDiezAnios(pacientes));
 
 
 // Apartado 2. Averiguar si hay pacientes con un ritmo cardiaco superior a 100
