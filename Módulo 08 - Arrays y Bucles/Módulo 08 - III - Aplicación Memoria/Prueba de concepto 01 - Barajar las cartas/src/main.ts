@@ -2,7 +2,7 @@ import "./style.css";
 
 const cartas = ['🐹', '🐶', '🐱', '🐰', '🐸'];
 
-function barajarCartas(array: string[]): string[] {
+const barajarCartas = (array: string[]): string[] => {
   return array.sort(() => Math.random() - 0.5);
 }
 
