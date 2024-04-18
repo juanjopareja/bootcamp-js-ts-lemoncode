@@ -10,7 +10,7 @@ const estableceImagen = (ejemploCarta: string) => {
     }
 }
 
-const cambiaFondoCarta = ()=> {
+const cambiaFondoCarta = () => {
     if (containerCarta !== null && containerCarta !== undefined && containerCarta instanceof HTMLDivElement) {
         containerCarta.classList.add('turnCart');
     }
