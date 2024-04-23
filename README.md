@@ -14,7 +14,7 @@ Código de cada una de las prácticas del ***Bootcamp JavaScript + TypeScript***
 * Módulo 03 - [Variables](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2003%20-%20Variables)
 * Módulo 04 - [Funciones](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2004%20-%20Funciones)
 * Módulo 05 - [Condicionales](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2005%20-%20Condicionales)
-* Módulo 06 - Imports
+* Módulo 06 - [Imports](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2006%20-%20Imports)
 * Módulo 07 - Testing
 * Módulo 08 - Arrays y Bucles
 * Módulo 09 - Algoritmos
