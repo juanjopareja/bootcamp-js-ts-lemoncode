@@ -1,5 +1,5 @@
 import "./style.css";
-import { iniciaPartida, hacerClickEnCarta } from './motor';
+import { iniciaPartida, hacerClickEnCarta } from './ui';
 import { tablero } from "./modelo";
 
 const comenzarPartidaBoton = document.getElementById("startGameBtn");

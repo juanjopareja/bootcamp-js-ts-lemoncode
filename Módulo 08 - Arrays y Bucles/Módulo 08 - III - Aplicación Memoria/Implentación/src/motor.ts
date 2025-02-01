@@ -1,10 +1,9 @@
 import { Carta, Tablero, tablero } from "./modelo";
-import { mostrarMensaje, cambiaFondoCartaInicial, mostrarIntentos, quitaFondoCarta, cambiarFondoCarta, leerIndiceCarta, reiniciarSRCImagen, reiniciarFondoImagen, cambiarBotonInicio, establecerSRCImagen, hoverFondoCarta, quitarHoverFondoCarta, animarImagen, reiniciarAnimacion, reiniciarAnimaciones } from "./ui";
 import { IntentosIniciales } from "./constantes";
 
 export let intentos: number = IntentosIniciales;
 
-const barajarCartas = (cartas: Carta[]): Carta[] => {
+export const barajarCartas = (cartas: Carta[]): Carta[] => {
 	for (let i = cartas.length - 1; i >= 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [{...cartas[i]}, {...cartas[j]}] = [cartas[j], cartas[i]];
@@ -52,41 +51,6 @@ export const esPartidaCompleta = (tablero: Tablero): boolean => {
 	return todasEncontradas;
 }
 
-export const iniciaPartida = (tablero: Tablero): void => {
-	mostrarMensaje("ReiniciarMensaje");
-	barajarCartas(tablero.cartas);
-	cambiaFondoCartaInicial();
-	hoverFondoCarta();
-	reiniciarTablero();
-	mostrarIntentos(intentos);
-	cambiarBotonInicio();
-}
-
-export const hacerClickEnCarta = (div: HTMLDivElement, tablero: Tablero): void => {
-
-	const indice = leerIndiceCarta(div);
-	mostrarMensaje("ReiniciarMensaje");
-
-	if (!partidaIniciada(tablero)) {
-		mostrarMensaje("PulsarBotonInicio");
-
-	} else if (sePuedeVoltearLaCarta(tablero, indice)) {
-
-		animarImagen(indice);
-		voltearLaCarta(tablero, indice);
-		cambiarFondoCarta(indice);
-		mostrarImagenCarta(tablero, indice);
-		cambiarEstadoTableroGuardarIndice(tablero, indice);
-
-		if (dosCartasLevantadas(tablero)) {
-			comprobarParejaLevantada(tablero);
-		}
-		
-	} else {
-		mostrarMensaje("CartaVolteada");
-	}
-}
-
 export const cambiarEstadoTableroGuardarIndice = (tablero: Tablero, indice: number) => {
 	switch (tablero.estadoPartida) {
 		case "CeroCartasLevantadas":
@@ -108,44 +72,6 @@ export const dosCartasLevantadas = (tablero: Tablero): boolean => {
 	return tablero.estadoPartida === "DosCartasLevantadas" ? true : false;
 }
 
-export const comprobarParejaLevantada = (tablero: Tablero): void => {
-	const indiceA = tablero.indiceCartaVolteadaA;
-	const indiceB = tablero.indiceCartaVolteadaB;
-
-	if (indiceA !== null && indiceA !== undefined && indiceB !== null && indiceB !== undefined) {
-		if (sonPareja(tablero, indiceA, indiceB)){
-			comprobarVictoria();
-			quitarHoverFondoCarta(indiceA);
-			quitarHoverFondoCarta(indiceB);
-			reiniciarAnimacion(indiceA);
-			
-		} else {
-			setTimeout(() => {
-				ponerCartaBocaAbajo(indiceA, indiceB);
-				reiniciarAnimacion(indiceB);
-			}, 1000);
-		}
-	}
-	
-	cambiarEstadoTablero("CeroCartasLevantadas");
-	sumarIntentos();
-	mostrarIntentos(intentos);
-}
-
-const comprobarVictoria = (): void => {
-	if (esPartidaCompleta(tablero)) {
-		tablero.estadoPartida = "PartidaCompleta";
-		mostrarMensaje("PartidaCompleta");
-	}
-}
-
-const mostrarImagenCarta = (tablero: Tablero, indice: number): void => {
-    const elementoImagenID = obtenerIDImagen(indice);
-    const srcImagen = obtenerSRCImagen(tablero, indice);
-
-    establecerSRCImagen(srcImagen, elementoImagenID);
-}
-
 export const obtenerIDImagen = (indice: number): string => {
 	const imagenID = "data-indice-imagen-";
 	return (`${imagenID}${indice}`);
@@ -155,7 +81,7 @@ export const obtenerSRCImagen = (tablero: Tablero, indice: number): string => {
 	return tablero.cartas[indice].imagen;
 }
 
-const cambiarEstadoTablero = (estado: Tablero['estadoPartida']): void => {
+export const cambiarEstadoTablero = (estado: Tablero['estadoPartida']): void => {
 	tablero.estadoPartida = estado;
 }
 
@@ -164,42 +90,20 @@ export const sumarIntentos = (): number => {
 	return intentos;
 }
 
-const reiniciarTablero = (): void => {
-	reiniciarSRCImagen();
-	reiniciarFondoImagen();
-	reiniciarIntentos();
-	reiniciarIndices();
-	reiniciarEncontradaYVolteada();
-	reiniciarAnimaciones();
-	tablero.estadoPartida = "CeroCartasLevantadas";
-}
-
-const reiniciarIntentos = (): number => {
+export const reiniciarIntentos = (): number => {
 	intentos = 0;
 	return intentos;
 }
 
-const reiniciarIndices = (): void => {
+export const reiniciarIndices = (): void => {
 	tablero.indiceCartaVolteadaA = -1;
 	tablero.indiceCartaVolteadaB = -1;
 }
 
-const reiniciarEncontradaYVolteada = (): void => {
+export const reiniciarEncontradaYVolteada = (): void => {
 	for (let i = 0; i < tablero.cartas.length; i++) {
 		tablero.cartas[i].encontrada = false;
 		tablero.cartas[i].estaVuelta = false;
 	}
 }
 
-const ponerCartaBocaAbajo = (indiceA: number, indiceB: number): void => {
-	const imagenIDA = obtenerIDImagen(indiceA);
-	const imagenIDB = obtenerIDImagen(indiceB);
-	const srcNulo = "";
-
-	quitaFondoCarta(indiceA);
-	quitaFondoCarta(indiceB);
-	establecerSRCImagen(srcNulo, imagenIDA);
-	establecerSRCImagen(srcNulo, imagenIDB);
-	reiniciarAnimacion(indiceA);
-	reiniciarAnimacion(indiceB);
-}
