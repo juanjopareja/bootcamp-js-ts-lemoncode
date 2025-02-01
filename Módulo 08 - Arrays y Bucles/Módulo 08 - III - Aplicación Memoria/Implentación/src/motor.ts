@@ -13,7 +13,6 @@ export const barajarCartas = (cartas: Carta[]): Carta[] => {
 }
 
 export const sePuedeVoltearLaCarta = (tablero: Tablero, indice: number): boolean => {
-
 	if (tablero.cartas[indice].estaVuelta === false && tablero.cartas[indice].encontrada === false && tablero.estadoPartida !== "DosCartasLevantadas") {
 		return true;
 	}

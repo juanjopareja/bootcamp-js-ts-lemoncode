@@ -1,6 +1,22 @@
 import { MensajesTexto } from "./constantes";
 import { Tablero, tablero } from "./modelo";
-import { barajarCartas, reiniciarIntentos, reiniciarIndices, reiniciarEncontradaYVolteada, intentos, partidaIniciada, sePuedeVoltearLaCarta, voltearLaCarta, cambiarEstadoTableroGuardarIndice, dosCartasLevantadas, obtenerIDImagen,sonPareja, esPartidaCompleta, cambiarEstadoTablero, sumarIntentos, obtenerSRCImagen } from "./motor";
+import { 
+    barajarCartas, 
+    reiniciarIntentos, 
+    reiniciarIndices, 
+    reiniciarEncontradaYVolteada, 
+    intentos, 
+    partidaIniciada, 
+    sePuedeVoltearLaCarta, 
+    voltearLaCarta, 
+    cambiarEstadoTableroGuardarIndice, 
+    dosCartasLevantadas, 
+    obtenerIDImagen,
+    sonPareja, esPartidaCompleta, 
+    cambiarEstadoTablero, 
+    sumarIntentos, 
+    obtenerSRCImagen 
+} from "./motor";
 
 const containerCarta = document.querySelectorAll('div[data-indice-id]');
 
@@ -194,7 +210,7 @@ const comprobarParejaLevantada = (tablero: Tablero): void => {
 }
 
 export const iniciaPartida = (tablero:Tablero): void => {
-	mostrarMensaje("ReiniciarMensaje");
+    mostrarMensaje("ReiniciarMensaje");
     barajarCartas(tablero.cartas);
     cambiaFondoCartaInicial();
     hoverFondoCarta();
@@ -213,7 +229,6 @@ export const hacerClickEnCarta = (div: HTMLDivElement, tablero: Tablero): void =
         mostrarMensaje("PulsarBotonInicio");
 
     } else if (sePuedeVoltearLaCarta(tablero, indice)) {
-
         animarImagen(indice);
         voltearLaCarta(tablero, indice);
         cambiarFondoCarta(indice);

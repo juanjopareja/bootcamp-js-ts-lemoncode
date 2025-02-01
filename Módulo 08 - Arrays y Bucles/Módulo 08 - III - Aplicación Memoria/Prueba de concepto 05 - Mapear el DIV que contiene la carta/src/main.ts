@@ -34,7 +34,6 @@ const arrayCartas: InfoCarta[] = [
 
 const containerCarta = document.querySelectorAll('div[data-indice-id]');
 
-// FUNCTIONS
 const cambiaFondoCarta = (i: number) => {
     if (containerCarta[i] !== null && containerCarta[i] !== undefined && containerCarta[i] instanceof HTMLDivElement) {
         containerCarta[i].classList.add('turnCart');
@@ -49,7 +48,6 @@ const muestraImagenCarta = (array: InfoCarta[], indice: number) => {
     }
 }
 
-// EVENTS
 for (let i = 0; i < containerCarta.length; i++) {
     if (containerCarta[i] !== null && containerCarta[i] !== undefined && containerCarta[i] instanceof HTMLDivElement) {
         containerCarta[i].addEventListener('click', () => {
