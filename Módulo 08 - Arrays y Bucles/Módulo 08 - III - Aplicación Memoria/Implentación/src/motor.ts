@@ -20,28 +20,30 @@ export const sePuedeVoltearLaCarta = (tablero: Tablero, indice: number): boolean
 	return false;
 }
 
+
+
 export const voltearLaCarta = (tablero: Tablero, indice: number): void => {
 	tablero.cartas[indice].estaVuelta = true;
 }
 
 export const sonPareja = (tablero: Tablero, indiceA: number, indiceB: number): boolean => {
-	if (tablero.cartas[indiceA].idFoto === tablero.cartas[indiceB].idFoto) {
-		parejaEncontrada(tablero, indiceA, indiceB);
-		return true;
-	} else {
-		parejaNoEncontrada(tablero, indiceA, indiceB);
-		return false;
-	}
+	return tablero.cartas[indiceA].idFoto === tablero.cartas[indiceB].idFoto;
 }
 
-const parejaEncontrada = (tablero: Tablero, indiceA: number, indiceB: number): void => {
+export const parejaEncontrada = (tablero: Tablero, indiceA: number, indiceB: number): void => {
 	tablero.cartas[indiceA].encontrada = true;
 	tablero.cartas[indiceB].encontrada = true;
+	tablero.estadoPartida = 'CeroCartasLevantadas';
+	tablero.indiceCartaVolteadaA = undefined;
+	tablero.indiceCartaVolteadaB = undefined;
 }
 
-const parejaNoEncontrada = (tablero: Tablero, indiceA: number, indiceB: number): void => {
+export const parejaNoEncontrada = (tablero: Tablero, indiceA: number, indiceB: number): void => {
 	tablero.cartas[indiceA].estaVuelta = false;
 	tablero.cartas[indiceB].estaVuelta = false;
+	tablero.estadoPartida = 'CeroCartasLevantadas';
+	tablero.indiceCartaVolteadaA = undefined;
+	tablero.indiceCartaVolteadaB = undefined;
 }
 
 export const esPartidaCompleta = (tablero: Tablero): boolean => {
@@ -92,11 +94,6 @@ export const sumarIntentos = (): number => {
 export const reiniciarIntentos = (): number => {
 	intentos = 0;
 	return intentos;
-}
-
-export const reiniciarIndices = (): void => {
-	tablero.indiceCartaVolteadaA = -1;
-	tablero.indiceCartaVolteadaB = -1;
 }
 
 export const reiniciarEncontradaYVolteada = (): void => {

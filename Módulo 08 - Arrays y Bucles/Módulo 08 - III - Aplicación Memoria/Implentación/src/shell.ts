@@ -13,7 +13,7 @@ const containerCarta = document.querySelectorAll('div[data-indice-id]');
 for (let i = 0; i < containerCarta.length; i++) {
     if (containerCarta[i] && containerCarta[i] instanceof HTMLDivElement) {
         containerCarta[i].addEventListener('click', () => {
-            hacerClickEnCarta(containerCarta[i] as HTMLDivElement, tablero);
+            hacerClickEnCarta(tablero, i);
         })   
     }
 }

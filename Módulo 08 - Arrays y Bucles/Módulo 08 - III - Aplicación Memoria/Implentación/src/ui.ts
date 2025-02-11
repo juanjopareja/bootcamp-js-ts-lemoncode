@@ -3,7 +3,6 @@ import { Tablero, tablero } from "./modelo";
 import { 
     barajarCartas, 
     reiniciarIntentos, 
-    reiniciarIndices, 
     reiniciarEncontradaYVolteada, 
     intentos, 
     partidaIniciada, 
@@ -15,21 +14,12 @@ import {
     sonPareja, esPartidaCompleta, 
     cambiarEstadoTablero, 
     sumarIntentos, 
-    obtenerSRCImagen 
+    obtenerSRCImagen,
+    parejaEncontrada,
+    parejaNoEncontrada
 } from "./motor";
 
 const containerCarta = document.querySelectorAll('div[data-indice-id]');
-
-const leerIndiceCarta = (div: HTMLDivElement): number => {
-    const dataIndiceID = div.getAttribute("data-indice-id");
-    let indice: number = -1;
-    
-    if (dataIndiceID) {
-        indice = parseInt(dataIndiceID);
-    }
-    
-    return indice;
-}
 
 const cambiaFondoCartaInicial = (): void => {
     const divList = document.getElementsByClassName("cart");
@@ -121,24 +111,24 @@ const reiniciarFondoImagen = (): void => {
 
 }
 
+const obtenerMensaje = (mensaje: MensajesTexto) => {
+    switch (mensaje) {
+        case "ReiniciarMensaje":
+            return ""
+        case "PulsarBotonInicio":
+            return "Pulsa en Iniciar Partida"
+        case "CartaVolteada":
+            return "Ya has volteado esta carta"
+        case "PartidaCompleta":
+            return "¡Partida Completada!"
+    }
+};
+
 const mostrarMensaje = (mensaje: MensajesTexto): void => {
     const elementoMensaje = document.getElementById("textMessage");
 
     if (elementoMensaje && elementoMensaje instanceof HTMLParagraphElement) {
-        switch (mensaje) {
-            case "ReiniciarMensaje":
-                elementoMensaje.innerHTML = ""
-                break;
-            case "PulsarBotonInicio":
-                elementoMensaje.innerHTML = "Pulsa en Iniciar Partida"
-                break;
-            case "CartaVolteada":
-                elementoMensaje.innerHTML = "Ya has volteado esta carta"
-                break;
-            case "PartidaCompleta":
-                elementoMensaje.innerHTML = "¡Partida Completada!"
-                break;
-        }
+        elementoMensaje.innerHTML = obtenerMensaje(mensaje);
     }
 }
 
@@ -185,23 +175,28 @@ const ponerCartaBocaAbajo = (indiceA: number, indiceB: number): void => {
     reiniciarAnimacion(indiceB);
 }
 
+const encontradaPareja = (tablero: Tablero, indiceA: number, indiceB: number) => {
+    parejaEncontrada(tablero, indiceA, indiceB);
+    comprobarVictoria();
+    quitarHoverFondoCarta(indiceA);
+    quitarHoverFondoCarta(indiceB);
+    reiniciarAnimacion(indiceA);
+}
+
+const noEncontradaPareja = (tablero: Tablero, indiceA: number, indiceB: number) => {
+    parejaNoEncontrada(tablero, indiceA, indiceB);
+    setTimeout(() => {
+        ponerCartaBocaAbajo(indiceA, indiceB);
+        reiniciarAnimacion(indiceB);
+    }, 1000);
+}
+
 const comprobarParejaLevantada = (tablero: Tablero): void => {
     const indiceA = tablero.indiceCartaVolteadaA;
     const indiceB = tablero.indiceCartaVolteadaB;
 
     if (indiceA !== null && indiceA !== undefined && indiceB !== null && indiceB !== undefined) {
-        if (sonPareja(tablero, indiceA, indiceB)){
-            comprobarVictoria();
-            quitarHoverFondoCarta(indiceA);
-            quitarHoverFondoCarta(indiceB);
-            reiniciarAnimacion(indiceA);
-            
-        } else {
-            setTimeout(() => {
-                ponerCartaBocaAbajo(indiceA, indiceB);
-                reiniciarAnimacion(indiceB);
-            }, 1000);
-        }
+        sonPareja(tablero, indiceA, indiceB) ? encontradaPareja(tablero, indiceA, indiceB) : noEncontradaPareja(tablero, indiceA, indiceB);
     }
     
     cambiarEstadoTablero("CeroCartasLevantadas");
@@ -217,28 +212,30 @@ export const iniciaPartida = (tablero:Tablero): void => {
     reiniciarTablero();
     mostrarIntentos(intentos);
     cambiarBotonInicio();
-
 }
 
-export const hacerClickEnCarta = (div: HTMLDivElement, tablero: Tablero): void => {
+const volteadaCarta = (tablero: Tablero, indice: number) => {
+    animarImagen(indice);
+    voltearLaCarta(tablero, indice);
+    cambiarFondoCarta(indice);
+    mostrarImagenCarta(tablero, indice);
+    cambiarEstadoTableroGuardarIndice(tablero, indice);
+    sonDosCartasLevantadas(tablero);
+}
 
-    const indice = leerIndiceCarta(div);
+const sonDosCartasLevantadas = (tablero: Tablero) => {
+    if (dosCartasLevantadas(tablero)) {
+        comprobarParejaLevantada(tablero);
+    }
+}
+
+export const hacerClickEnCarta = (tablero: Tablero, indice: number): void => {
     mostrarMensaje("ReiniciarMensaje");
 
     if (!partidaIniciada(tablero)) {
         mostrarMensaje("PulsarBotonInicio");
-
     } else if (sePuedeVoltearLaCarta(tablero, indice)) {
-        animarImagen(indice);
-        voltearLaCarta(tablero, indice);
-        cambiarFondoCarta(indice);
-        mostrarImagenCarta(tablero, indice);
-        cambiarEstadoTableroGuardarIndice(tablero, indice);
-
-        if (dosCartasLevantadas(tablero)) {
-            comprobarParejaLevantada(tablero);
-        }
-        
+        volteadaCarta(tablero, indice);
     } else {
         mostrarMensaje("CartaVolteada");
     }
@@ -248,7 +245,6 @@ const reiniciarTablero = (): void => {
     reiniciarSRCImagen();
     reiniciarFondoImagen();
     reiniciarIntentos();
-    reiniciarIndices();
     reiniciarEncontradaYVolteada();
     reiniciarAnimaciones();
     tablero.estadoPartida = "CeroCartasLevantadas";
