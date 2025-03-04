@@ -3,6 +3,7 @@ import { TIPO_IVA } from "./constantes";
 import { 
     LineaTicket,
     ResultadoLineaTicket,
+    ResultadoTotalTicket,
     TotalPorTipoIva,
 } from "./modelo";
 
@@ -58,4 +59,16 @@ export const calcularDesgloseIva = (lineasTicket: LineaTicket[]): TotalPorTipoIv
 
 export const calculaTicket = (lineasTicket: LineaTicket[]): ResultadoLineaTicket[] => {
     return lineasTicket.map(linea => procesarLineaTicket(linea));
+}
+
+export const calcularTotalesTicket = (lineasTicket: LineaTicket[]): ResultadoTotalTicket => {
+    const totalSinIva = calcularTotalSinIva(lineasTicket);
+    const totalConIva = calcularTotalConIva(lineasTicket);
+    const totalIva = calcularTotalIva(lineasTicket);
+
+    return {
+        totalSinIva: totalSinIva,
+        totalConIva: totalConIva,
+        totalIva: totalIva,
+    };
 }

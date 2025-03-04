@@ -1,15 +1,12 @@
 import { 
     LineaTicket, 
-    ResultadoTotalTicket,
     TicketFinal,
 } from "./modelo";
 
 import { 
-    calcularTotalSinIva,
-    calcularTotalConIva,
-    calcularTotalIva,
     calcularDesgloseIva,
     calculaTicket,
+    calcularTotalesTicket,
 } from "./motor";
 
 
@@ -65,18 +62,6 @@ const productos: LineaTicket[] = [
     
 ];
 
-const calcularTotalesTicket = (lineasTicket: LineaTicket[]): ResultadoTotalTicket => {
-    const totalSinIva = calcularTotalSinIva(lineasTicket);
-    const totalConIva = calcularTotalConIva(lineasTicket);
-    const totalIva = calcularTotalIva(lineasTicket);
-
-    return {
-        totalSinIva: totalSinIva,
-        totalConIva: totalConIva,
-        totalIva: totalIva,
-    };
-}
-
 const mostrarTicketFinal = (lineasTicket: LineaTicket[]): void => {
     const resultados = calculaTicket(lineasTicket);
     const totales = calcularTotalesTicket(lineasTicket);
@@ -115,4 +100,6 @@ const mostrarTicketFinal = (lineasTicket: LineaTicket[]): void => {
     }
 }
 
-mostrarTicketFinal(productos);
+document.addEventListener('DOMContentLoaded', () => {
+    mostrarTicketFinal(productos);
+});
