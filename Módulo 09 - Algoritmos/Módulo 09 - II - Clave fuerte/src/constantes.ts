@@ -1,4 +1,4 @@
-const commonPasswords: string[] = [
+export const commonPasswords: string[] = [
     "password",
     "123456",
     "qwerty",
