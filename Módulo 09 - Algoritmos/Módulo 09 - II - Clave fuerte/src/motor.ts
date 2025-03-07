@@ -25,7 +25,7 @@ const mensajeDeError = (error: string): string => {
     }
 }
 
-const tieneMayusculasYMinusculas = (clave: string): ValidacionClave => {
+export const tieneMayusculasYMinusculas = (clave: string): ValidacionClave => {
     const tieneMayusculas = /[A-Z]/.test(clave);
     const tieneMinusculas = /[a-z]/.test(clave);
 
@@ -34,7 +34,7 @@ const tieneMayusculasYMinusculas = (clave: string): ValidacionClave => {
         { esValida: true, error: "" };
 };
 
-const tieneNumeros = (clave: string): ValidacionClave => {
+export const tieneNumeros = (clave: string): ValidacionClave => {
     const tieneNumeros = /[0-9]/.test(clave);
 
     return !tieneNumeros ? 
@@ -42,7 +42,7 @@ const tieneNumeros = (clave: string): ValidacionClave => {
         { esValida: true, error: "" };
 };
 
-const tieneCaracteresEspeciales = (clave: string): ValidacionClave => {
+export const tieneCaracteresEspeciales = (clave: string): ValidacionClave => {
     const tieneCaracteresEspeciales = /[!¡@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?¿]+/.test(clave);
 
     return !tieneCaracteresEspeciales ?
@@ -50,7 +50,7 @@ const tieneCaracteresEspeciales = (clave: string): ValidacionClave => {
         { esValida: true, error: "" };
 };
 
-const tieneLongitudMinima = (clave: string): ValidacionClave => {
+export const tieneLongitudMinima = (clave: string): ValidacionClave => {
     const longitudMinima = clave.length >= 8;
 
     return !longitudMinima ?
@@ -58,7 +58,7 @@ const tieneLongitudMinima = (clave: string): ValidacionClave => {
         { esValida: true, error: "" };
 };
 
-const tieneNombreUsuario = (nombreUsuario: string, clave: string): ValidacionClave => {
+export const tieneNombreUsuario = (nombreUsuario: string, clave: string): ValidacionClave => {
     const tieneNombreUsuario = clave.includes(nombreUsuario);
 
     return tieneNombreUsuario ?
@@ -66,7 +66,7 @@ const tieneNombreUsuario = (nombreUsuario: string, clave: string): ValidacionCla
         { esValida: true, error: "" };
 };
 
-const tienePalabrasComunes = (clave: string, commonPasswords: string[]): ValidacionClave => {
+export const tienePalabrasComunes = (clave: string, commonPasswords: string[]): ValidacionClave => {
     const tienePalabrasComunes = commonPasswords.includes(clave);
 
     return tienePalabrasComunes ?
