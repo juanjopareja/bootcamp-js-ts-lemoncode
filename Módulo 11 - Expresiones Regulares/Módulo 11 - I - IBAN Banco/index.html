@@ -4,12 +4,32 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Validar IBAN</title>
   </head>
   <body>
-    <div id="app">
-      <h1>TypeScript Sandbox</h1>
-    </div>
+    <header>
+      <div class="header-container">
+        <h1>Validar IBAN</h1>
+      </div>
+    </header>
+    <main class="app">
+      <div class="iban-content">
+        <div class="iban-title">
+          <h4>Introduzca el IBAN</h4>
+        </div>
+        <div class="input-container">
+          <div class="iban-container">
+            <input type="text" id="iban" placeholder="ES1234567890123456789012"/>
+          </div>
+          <div class="button-container">
+            <button id="btn-validate-iban">
+              <img src="./src/img/lupa.png" alt="lupa" id="lupa" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="data-extract" id="data-extract"></div>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
