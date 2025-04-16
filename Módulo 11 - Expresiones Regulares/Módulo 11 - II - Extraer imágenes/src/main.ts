@@ -1,3 +1,11 @@
 import "./style.css";
+import { extraerEnlacesImg } from "./ui";
 
-console.log("Hello Typescript!");
+const extractBtn = document.getElementById("btn-extract-img");
+
+if (extractBtn && extractBtn instanceof HTMLButtonElement) {
+    extractBtn.addEventListener("click", () => {
+        extraerEnlacesImg();
+    });
+}
+

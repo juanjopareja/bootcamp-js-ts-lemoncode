@@ -4,12 +4,30 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Extraer Imágenes</title>
   </head>
   <body>
-    <div id="app">
-      <h1>TypeScript Sandbox</h1>
-    </div>
+    <header>
+      <div class="header-container">
+        <h1>Extraer Imágenes</h1>
+      </div>
+    </header>
+    <main class="app">
+      <div class="html-content">
+        <div class="html-title">
+          <h4>Pegue el HTML</h4>
+        </div>
+        <div class="input-container">
+          <div class="html-container">
+            <textarea name="html-paste" id="html-paste" cols="90" rows="15"></textarea>
+          </div>
+          <div class="button-container">
+            <button id="btn-extract-img">Extraer Imágenes</button>
+          </div>
+        </div>
+      </div>
+      <div class="data-extract" id="data-extract"></div>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
