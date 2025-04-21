@@ -2,13 +2,6 @@ import { isValidIBAN } from "../node_modules/ibantools";
 import { PATTERN_IBAN, BANCOS } from "./constantes";
 import { IBAN } from "./model";
 
-export const capturarIBAN = (): string => {
-    const inputIBAN = document.getElementById("iban") as HTMLInputElement;
-    const ibanIntroducido = inputIBAN.value;
-
-    return ibanIntroducido;
-}
-
 export const compruebaFormato = (iban: string): boolean => {
     const regex = PATTERN_IBAN;
 

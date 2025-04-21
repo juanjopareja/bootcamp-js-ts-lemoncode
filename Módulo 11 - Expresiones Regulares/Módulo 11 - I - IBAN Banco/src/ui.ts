@@ -1,5 +1,12 @@
 import { TEXT_IBAN } from "./constantes";
-import { capturarIBAN, compruebaFormato, validaFormato, extraeDatosIban } from "./motor";
+import { compruebaFormato, validaFormato, extraeDatosIban } from "./motor";
+
+const capturarIBAN = (): string => {
+    const inputIBAN = document.getElementById("iban") as any;
+    const ibanIntroducido = inputIBAN.value;
+
+    return ibanIntroducido;
+}
 
 const crearElementoContenedor = (): HTMLDivElement => {
     const contenedor = document.createElement("div");
@@ -51,26 +58,26 @@ const crearContenedorIban = (): HTMLDivElement => {
 };
 
 const resetearContenedor = (): HTMLDivElement => {
-    const contenedor = document.getElementsByClassName("data-container")[0] as HTMLDivElement;
+    const contenedor = document.getElementsByClassName("data-container")[0] as any;
     contenedor ? contenedor.remove() : null;
 
     return contenedor;
 }
 
 const pintarMensajeFormato = (iban: string): void => {
-    const parrafoForm = document.getElementById("formatted-iban") as HTMLParagraphElement;
+    const parrafoForm = document.getElementById("formatted-iban") as any;
     const mensajeFormado = devuelveMensajeFormado(compruebaFormato(iban));
     parrafoForm.innerHTML = mensajeFormado;
 };
 
 const pintarMensajeValido = (iban: string): void => {
-    const parrafoVal = document.getElementById("validated-iban") as HTMLParagraphElement;
+    const parrafoVal = document.getElementById("validated-iban") as any;
     const mensajeValido = devuelveMensajeValido(validaFormato(iban));
     parrafoVal.innerHTML = mensajeValido;
 };
 
 const pintarContenedorIBAN = (): void => {
-    const dataExtract = document.getElementById("data-extract") as HTMLDivElement;
+    const dataExtract = document.getElementById("data-extract") as any;
     const contenedor = crearContenedorIban();
 
     dataExtract.appendChild(contenedor);
@@ -83,16 +90,16 @@ const pintarDatosValidacion = (iban: string): void => {
 
 const pintarDatosExtraccion = (iban: string): void => {
     const datos = extraeDatosIban(iban);
-    const banco = document.getElementById("banco-iban") as HTMLParagraphElement;
+    const banco = document.getElementById("banco-iban") as any;
     banco.innerHTML = "Banco: " + datos.nombreBanco;
 
-    const sucursal = document.getElementById("sucursal-iban") as HTMLParagraphElement;
+    const sucursal = document.getElementById("sucursal-iban") as any;
     sucursal.innerHTML = "Código sucursal: " + datos.sucursal;
 
-    const cControl = document.getElementById("cc-iban") as HTMLParagraphElement;
+    const cControl = document.getElementById("cc-iban") as any;
     cControl.innerHTML = "Dígito de control: " + datos.cControl;
 
-    const cuenta = document.getElementById("cuenta-iban") as HTMLParagraphElement;
+    const cuenta = document.getElementById("cuenta-iban") as any;
     cuenta.innerHTML = "Número de cuenta: " + datos.cuenta;
 }
 
