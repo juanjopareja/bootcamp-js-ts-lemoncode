@@ -2,10 +2,14 @@ import { TEXT_IBAN } from "./constantes";
 import { compruebaFormato, validaFormato, extraeDatosIban } from "./motor";
 
 const capturarIBAN = (): string => {
-    const inputIBAN = document.getElementById("iban") as any;
-    const ibanIntroducido = inputIBAN.value;
+    const inputIBAN = document.getElementById("iban");
 
-    return ibanIntroducido;
+    if(inputIBAN !== null && inputIBAN !== undefined && inputIBAN instanceof HTMLInputElement) {
+        const ibanIntroducido = inputIBAN.value;
+        return ibanIntroducido;
+    }
+
+    return "";
 }
 
 const crearElementoContenedor = (): HTMLDivElement => {
@@ -57,30 +61,35 @@ const crearContenedorIban = (): HTMLDivElement => {
     return contenedor;
 };
 
-const resetearContenedor = (): HTMLDivElement => {
-    const contenedor = document.getElementsByClassName("data-container")[0] as any;
-    contenedor ? contenedor.remove() : null;
-
-    return contenedor;
+const resetearContenedor = (): void => {
+    const contenedor = document.getElementsByClassName("data-container")[0];
+    if (contenedor !== null && contenedor !== undefined && contenedor instanceof HTMLDivElement) {
+        contenedor ? contenedor.remove() : null;
+    }
 }
 
 const pintarMensajeFormato = (iban: string): void => {
-    const parrafoForm = document.getElementById("formatted-iban") as any;
-    const mensajeFormado = devuelveMensajeFormado(compruebaFormato(iban));
-    parrafoForm.innerHTML = mensajeFormado;
+    const parrafoForm = document.getElementById("formatted-iban");
+    if (parrafoForm !== null && parrafoForm !== undefined && parrafoForm instanceof HTMLParagraphElement) {
+        const mensajeFormado = devuelveMensajeFormado(compruebaFormato(iban));
+        parrafoForm.innerHTML = mensajeFormado;        
+    }
 };
 
 const pintarMensajeValido = (iban: string): void => {
-    const parrafoVal = document.getElementById("validated-iban") as any;
-    const mensajeValido = devuelveMensajeValido(validaFormato(iban));
-    parrafoVal.innerHTML = mensajeValido;
+    const parrafoVal = document.getElementById("validated-iban");
+    if (parrafoVal !== null && parrafoVal !== undefined && parrafoVal instanceof HTMLParagraphElement) {
+        const mensajeValido = devuelveMensajeValido(validaFormato(iban));
+        parrafoVal.innerHTML = mensajeValido;        
+    }
 };
 
 const pintarContenedorIBAN = (): void => {
-    const dataExtract = document.getElementById("data-extract") as any;
-    const contenedor = crearContenedorIban();
-
-    dataExtract.appendChild(contenedor);
+    const dataExtract = document.getElementById("data-extract");
+    if (dataExtract !== null && dataExtract !== undefined && dataExtract instanceof HTMLDivElement) {
+        const contenedor = crearContenedorIban();
+        dataExtract.appendChild(contenedor);
+    }
 };
 
 const pintarDatosValidacion = (iban: string): void => {
@@ -90,17 +99,25 @@ const pintarDatosValidacion = (iban: string): void => {
 
 const pintarDatosExtraccion = (iban: string): void => {
     const datos = extraeDatosIban(iban);
-    const banco = document.getElementById("banco-iban") as any;
-    banco.innerHTML = "Banco: " + datos.nombreBanco;
+    const banco = document.getElementById("banco-iban");
+    if (banco !== null && banco !== undefined && banco instanceof HTMLParagraphElement) {
+        banco.innerHTML = "Banco: " + datos.nombreBanco;       
+    }
 
-    const sucursal = document.getElementById("sucursal-iban") as any;
-    sucursal.innerHTML = "Código sucursal: " + datos.sucursal;
+    const sucursal = document.getElementById("sucursal-iban");
+    if (sucursal !== null && sucursal !== undefined && sucursal instanceof HTMLParagraphElement) {
+        sucursal.innerHTML = "Sucursal: " + datos.sucursal;        
+    }
 
-    const cControl = document.getElementById("cc-iban") as any;
-    cControl.innerHTML = "Dígito de control: " + datos.cControl;
+    const cControl = document.getElementById("cc-iban");
+    if (cControl !== null && cControl !== undefined && cControl instanceof HTMLParagraphElement) {
+        cControl.innerHTML = "Código de control: " + datos.cControl;        
+    }
 
-    const cuenta = document.getElementById("cuenta-iban") as any;
-    cuenta.innerHTML = "Número de cuenta: " + datos.cuenta;
+    const cuenta = document.getElementById("cuenta-iban");
+    if (cuenta !== null && cuenta !== undefined && cuenta instanceof HTMLParagraphElement) {
+        cuenta.innerHTML = "Número de cuenta: " + datos.cuenta;        
+    }
 }
 
 const obtenerMensaje = (mensaje: TEXT_IBAN) => {
