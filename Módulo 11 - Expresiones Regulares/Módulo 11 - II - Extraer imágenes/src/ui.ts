@@ -2,9 +2,13 @@ import { extraerEnlacesTexto } from "./motor";
 
 const capturaTextoHTML = (): string => {
     const inputHTML = document.getElementById("html-paste") as any;
-    const textoIntroducido = inputHTML.value;
 
-    return textoIntroducido;
+	if (inputHTML !== null && inputHTML !== undefined && inputHTML instanceof HTMLTextAreaElement) {
+		const textoIntroducido = inputHTML.value;
+		return textoIntroducido;
+	}
+
+	return "";
 };
 
 const crearElementoContenedor = (): HTMLDivElement => {
@@ -22,31 +26,56 @@ const crearElementoImagen = (): HTMLImageElement => {
   	return imagen
 }
 
-const resetearContenedor = (): HTMLDivElement => {
-	const contenedor = document.getElementsByClassName("data-container")[0] as any;
-	contenedor ? contenedor.remove() : null;
+const crearContenedorDatos = (): HTMLDivElement => {
+	const contenedorPrincipal = document.getElementsByClassName("data-extract")[0];
 
-	return contenedor;
+	if (contenedorPrincipal !== null && contenedorPrincipal !== undefined && contenedorPrincipal instanceof HTMLDivElement) {
+		const contenedorDatos = crearElementoContenedor();
+		contenedorDatos.classList.add("data-container");
+		contenedorDatos.setAttribute("id", "data-container");
+		contenedorPrincipal.appendChild(contenedorDatos);
+		
+		return contenedorDatos;
+	}
+
+	throw new Error("No se ha encontrado el contenedor principal.");
+
+}
+// MIRAR EL RESET
+const resetearContenedorDatos = (): void => {
+	const contenedorDatos = document.getElementsByClassName("data-container")[0];
+	if (contenedorDatos !== null && contenedorDatos !== undefined && contenedorDatos instanceof HTMLDivElement) {
+		contenedorDatos ? contenedorDatos.remove() : null;
+	}
 };
 
 const pintarContenedorEnlacesImg = (): HTMLDivElement => {
-  	const dataExtract = document.getElementById("data-extract") as any;
-	const contenedor = crearElementoContenedor();
-	contenedor.classList.add("data-container");
-	contenedor.setAttribute("id", "data-container");
-	dataExtract.appendChild(contenedor);
+  	const dataContainer = document.getElementById("data-container");
 
-	return dataExtract;
+	if (dataContainer !== null && dataContainer !== undefined && dataContainer instanceof HTMLDivElement) {
+		const contenedor = crearElementoContenedor();
+		contenedor.classList.add("link-container");
+		contenedor.setAttribute("id", "link-container");
+		dataContainer.appendChild(contenedor);
+		return dataContainer;
+	}
+
+	throw new Error("No se ha encontrado el contenedor de datos.");
 };
 
 const pintarContenedorImagenes = (): HTMLDivElement => {
-	const dataExtract = document.getElementById("data-extract") as any;
-	const contenedor = crearElementoContenedor();
-	contenedor.classList.add("image-container");
-	contenedor.setAttribute("id", "image-container");
-	dataExtract.appendChild(contenedor);
+	const dataContainer = document.getElementById("data-container");
 
-	return dataExtract;
+	if (dataContainer !== null && dataContainer !== undefined && dataContainer instanceof HTMLDivElement) {
+		const contenedor = crearElementoContenedor();
+		contenedor.classList.add("image-container");
+		contenedor.setAttribute("id", "image-container");
+		dataContainer.appendChild(contenedor);
+	
+		return dataContainer;
+	}
+
+	throw new Error("No se ha encontrado el contenedor de datos.");
 }
 
 const pintarEnlaces = (enlaces: string[]): void => {
@@ -55,8 +84,11 @@ const pintarEnlaces = (enlaces: string[]): void => {
 		parrafoImg.classList.add("image-link");
 		parrafoImg.textContent = enlace;
 
-		const dataContainer = document.getElementById("data-container") as any;
-		dataContainer.appendChild(parrafoImg);
+		const dataContainer = document.getElementById("link-container");
+
+		if (dataContainer !== null && dataContainer !== undefined && dataContainer instanceof HTMLDivElement) {
+			dataContainer.appendChild(parrafoImg);
+		}
 	});
 };
 
@@ -66,13 +98,16 @@ const pintarImagenes = (enlaces: string[]): void => {
         imagen.classList.add("image");
         imagen.setAttribute("src", enlace);
 
-        const imageContainer = document.getElementById("image-container") as any;
-        imageContainer.appendChild(imagen);
+        const imageContainer = document.getElementById("image-container");
+		if (imageContainer !== null && imageContainer !== undefined && imageContainer instanceof HTMLDivElement) {
+			imageContainer.appendChild(imagen);
+		}
     });
 }
 
 export const extraerEnlacesImg = () => {
-	resetearContenedor();
+	resetearContenedorDatos();
+	crearContenedorDatos();
 	pintarContenedorEnlacesImg();
 	pintarContenedorImagenes();
 
