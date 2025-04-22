@@ -143,9 +143,10 @@ const devuelveMensajeValido = (result: boolean): string => {
 
 export const comprobarIBAN = (): void => {
     const iban = capturarIBAN();
+    const ibanValido = validaFormato(iban);
 
     resetearContenedor();
     pintarContenedorIBAN();
     pintarDatosValidacion(iban);
-    pintarDatosExtraccion(iban);
+    ibanValido ? pintarDatosExtraccion(iban) : null;
 };

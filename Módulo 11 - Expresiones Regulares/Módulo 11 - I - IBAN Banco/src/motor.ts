@@ -1,4 +1,4 @@
-import { isValidIBAN } from "../node_modules/ibantools";
+import { isValidIBAN } from "ibantools";
 import { PATTERN_IBAN, BANCOS } from "./constantes";
 import { IBAN } from "./model";
 
