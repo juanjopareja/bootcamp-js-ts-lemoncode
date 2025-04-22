@@ -1,7 +1,7 @@
 import { extraerEnlacesTexto } from "./motor";
 
 const capturaTextoHTML = (): string => {
-    const inputHTML = document.getElementById("html-paste") as any;
+    const inputHTML = document.getElementById("html-paste");
 
 	if (inputHTML !== null && inputHTML !== undefined && inputHTML instanceof HTMLTextAreaElement) {
 		const textoIntroducido = inputHTML.value;
