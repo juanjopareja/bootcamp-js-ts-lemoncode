@@ -1,0 +1,1 @@
+export const DESCUENTO_TOUROPERADOR = 0.15;
