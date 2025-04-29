@@ -25,12 +25,12 @@ const reservas = [
 ];
 
 console.log("CASO 1: Reservas Particular");
-const reservasParticular = new Reservas(reservas, 100, 150, 40, 15, 0.21);
+const reservasParticular = new Reservas(reservas);
 reservasParticular.resumenReservas();
 console.log("--------------------");
 
 console.log("CASO 2: Reservas Touroperador");
-const reservasTouroperador = new Touroperador(reservas, 100, 100, 40, 15, 0.21, 0.15);
+const reservasTouroperador = new Touroperador(reservas);
 reservasTouroperador.resumenReservas();
 console.log("--------------------");
 
@@ -40,7 +40,7 @@ reservasDesafioParticular.resumenReservas();
 console.log("--------------------");
 
 console.log("DESAFIO: Reservas Touroperador");
-const reservasDesafioTouroperador = new ReservasTouroperador(reservas, 0.15);
+const reservasDesafioTouroperador = new ReservasTouroperador(reservas);
 reservasDesafioTouroperador.resumenReservas();
 console.log("--------------------");
 

@@ -1,46 +1,81 @@
 import { Reserva } from "./modelo";
+import { PRECIO_SERVICIOS, IVA } from "./constantes";
 
 export class Reservas {
-    reservas: Reserva[];
-    precioStandard: number;
-    precioSuite: number;
-    precioNoche: number;
-    precioDesayuno: number;
-    precioIva: number;
+  reservas: Reserva[];
+  precioStandard: number;
+  precioSuite: number;
+  precioNoche: number;
+  precioDesayuno: number;
+  precioIva: number;
 
-    constructor(reservas: Reserva[], precioStandard: number, precioSuite: number, precioNoche: number, precioDesayuno: number, precioIva: number) {
-        this.reservas = reservas;
-        this.precioStandard = precioStandard;
-        this.precioSuite = precioSuite;
-        this.precioNoche = precioNoche;
-        this.precioDesayuno = precioDesayuno;
-        this.precioIva = precioIva;
+  constructor(reservas: Reserva[]) {
+    this.reservas = reservas;
+    this.precioStandard = this.seleccionaPrecios("standard");
+    this.precioSuite = this.seleccionaPrecios("suite");
+    this.precioNoche = this.seleccionaPrecios("noches");
+    this.precioDesayuno = this.seleccionaPrecios("desayuno");
+    this.precioIva = this.seleccionaPrecios("iva");
+  }
+
+  seleccionaPrecios(tipoPrecio: string): number {
+    switch (tipoPrecio) {
+      case "standard":
+        return PRECIO_SERVICIOS.standard;
+      case "suite":
+        return PRECIO_SERVICIOS.suite;
+      case "touroperador":
+        return PRECIO_SERVICIOS.touroperador;
+      case "noches":
+        return PRECIO_SERVICIOS.noches;
+      case "desayuno":
+        return PRECIO_SERVICIOS.desayuno;
+      case "iva":
+        return IVA;
+      default:
+        return 0;
     }
+  }
 
-    calcularSubtotal(): number {
-        let subtotal = 0;
-        for (const reserva of this.reservas) {
-            let precioHabitacion = reserva.tipoHabitacion === "standard" ? this.precioStandard : this.precioSuite;
-            let precioDesayuno = reserva.desayuno ? this.precioDesayuno : 0;
-            subtotal += precioHabitacion * reserva.noches + this.precioNoche * (reserva.pax - 1) * reserva.noches + precioDesayuno * reserva.noches * reserva.pax;
-        }
-        return subtotal;
-    }
+  calcularSubtotal(): number {
+    const subtotal = this.reservas.reduce((acumulador, reserva) => {
+      const precioHabitacion =
+        reserva.tipoHabitacion === "standard"
+          ? this.precioStandard
+          : this.precioSuite;
+      const precioDesayuno = reserva.desayuno ? this.precioDesayuno : 0;
 
-    calcularTotal(): number {
-        const subtotal = this.calcularSubtotal();
-        const iva = subtotal * this.precioIva;
-        return subtotal + iva;
-    }
+      return (
+        acumulador +
+        precioHabitacion * reserva.noches +
+        this.precioNoche * (reserva.pax - 1) * reserva.noches +
+        precioDesayuno * reserva.noches * reserva.pax
+      );
+    }, 0);
 
-    resumenReservas(): void {
-        console.log("Resumen de reservas:");
+    return subtotal;
+  }
 
-        this.reservas.forEach((reserva) => {
-            console.log(`Tipo de habitación: ${reserva.tipoHabitacion}, Pax: ${reserva.pax}, Noches: ${reserva.noches}, Desayuno: ${reserva.desayuno ? "Sí" : "No"}`);
-        });
+  calcularTotal(): number {
+    const subtotal = this.calcularSubtotal();
+    const iva = subtotal * this.precioIva;
+    return subtotal + iva;
+  }
 
-        console.log(`Subtotal: ${this.calcularSubtotal()}`);
-        console.log(`Total: ${this.calcularTotal()}`);
-    }
+  resumenReservas(): void {
+    console.log("Resumen de reservas:");
+
+    this.reservas.forEach((reserva) => {
+      console.log(
+        `Tipo de habitación: ${reserva.tipoHabitacion}, Pax: ${
+          reserva.pax
+        }, Noches: ${reserva.noches}, Desayuno: ${
+          reserva.desayuno ? "Sí" : "No"
+        }`
+      );
+    });
+
+    console.log(`Subtotal: ${this.calcularSubtotal()}`);
+    console.log(`Total: ${this.calcularTotal()}`);
+  }
 }

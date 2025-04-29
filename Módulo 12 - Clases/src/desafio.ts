@@ -18,12 +18,13 @@ class ReservasDesafio {
     }
 
     calcularSubtotal(): number {
-        let subtotal = 0;
-        for (const reserva of this.reservas) {
-            let precioHabitacion = reserva.tipoHabitacion === "standard" ? this.precioStandard : this.precioSuite;
-            let precioDesayuno = reserva.desayuno ? this.precioDesayuno : 0;
-            subtotal += precioHabitacion * reserva.noches + this.precioNoche * (reserva.pax - 1) * reserva.noches + precioDesayuno * reserva.noches * reserva.pax;
-        }
+        const subtotal = this.reservas.reduce((acumulador, reserva) => {
+            const precioHabitacion = reserva.tipoHabitacion === "standard" ? this.precioStandard : this.precioSuite;
+            const precioDesayuno = reserva.desayuno ? this.precioDesayuno : 0;
+
+            return acumulador + precioHabitacion * reserva.noches + this.precioNoche * (reserva.pax - 1) * reserva.noches + precioDesayuno * reserva.noches * reserva.pax;
+        }, 0);
+
         return subtotal;
     }
 
@@ -55,9 +56,9 @@ export class ReservasTouroperador extends ReservasDesafio {
     percentDescuento: number;
     precioHabitacion = 100;
 
-    constructor(reservas: Reserva[], cantDescuento: number) {
+    constructor(reservas: Reserva[]) {
         super(reservas);
-        this.percentDescuento = cantDescuento;
+        this.percentDescuento = 0.15;
         this.precioStandard = this.precioHabitacion * (1 - this.percentDescuento);
         this.precioSuite = this.precioHabitacion * (1 - this.percentDescuento);
         this.precioNoche = this.precioNoche * (1 - this.percentDescuento);
