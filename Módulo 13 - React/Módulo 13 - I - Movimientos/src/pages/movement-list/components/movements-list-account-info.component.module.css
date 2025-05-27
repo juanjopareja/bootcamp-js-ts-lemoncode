@@ -1,0 +1,42 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-end;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 5px solid #232c3b;
+}
+
+.header-container h1 {
+  font-size: 2.2rem;
+  font-weight: 300;
+}
+
+.header-container p {
+    font-size: 14px;
+    font-weight:bold;
+}
+
+.header-container span {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary_color);
+}
+
+.header-amount-container {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+}
+
+.data-account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.data-account p {
+    font-size: 16px;
+    font-weight: bold;
+}
