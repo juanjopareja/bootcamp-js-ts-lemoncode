@@ -1,0 +1,24 @@
+.row {
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    gap: 1px;
+}
+
+.row:nth-child(odd) {
+    background-color: #eeeeee;
+}
+
+.data-cell {
+    font-size: 16px;
+    padding: 15px;
+    color: var(--secondary_color);
+    align-self: center;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.red-numbers-alert {
+    color: var(--error_color);
+}

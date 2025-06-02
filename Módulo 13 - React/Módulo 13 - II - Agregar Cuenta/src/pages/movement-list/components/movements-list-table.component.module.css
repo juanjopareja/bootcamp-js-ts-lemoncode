@@ -1,0 +1,17 @@
+.header-table {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  gap: 1px;
+}
+
+.header-cell {
+  padding: 10px;
+  color: var(--table-header-color);
+  background-color: var(--table-header-background-color);
+  font-size: var(--table-header-font-size);
+  font-weight: var(--table-header-font-weight);
+}
+
+.grid-table {
+  min-width: 800px;
+}
