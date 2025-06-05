@@ -16,7 +16,7 @@ Código de cada una de las prácticas del ***Bootcamp JavaScript + TypeScript***
 * Módulo 05 - [Condicionales](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2005%20-%20Condicionales)
 * Módulo 06 - [Imports](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2006%20-%20Imports)
 * Módulo 07 - [Testing](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2007%20-%20Testing)
-* Módulo 08 - Arrays y Bucles
+* Módulo 08 - [Arrays y Bucles](https://github.com/juanjopareja/bootcamp-js-ts-lemoncode/tree/main/M%C3%B3dulo%2008%20-%20Arrays%20y%20Bucles)
 * Módulo 09 - Algoritmos
 * Módulo 10 - Asincronía
 * Módulo 11 - Expresiones regulares
